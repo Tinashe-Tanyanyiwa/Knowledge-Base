@@ -1,0 +1,360 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  font-family: 'Poppins', sans-serif;
+}
+html {
+  font-family: 'Poppins', sans-serif;
+  background-color: white;
+}
+
+section {
+  font-family: 'Poppins', sans-serif;
+}
+
+body {
+  font-family: "Poppins", sans-serif;
+  scroll-behavior: smooth;
+  margin: 0px;
+  height: 100%;
+}
+/* 1st Section Styling >> Home Page */
+
+.gray{
+  background-color: #dddddd ;
+}
+
+.red{
+  background-color: red;
+}
+
+.green{
+  background-image: url(./Images/login.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+  border-radius: 0px 15px 15px 0px;
+}
+.signup{
+  height: 110vh;
+  background-image: url(./Images/signup.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.logoutButton{
+  display: flex;
+    justify-content: center;
+    width: 18% !important;
+}
+.buttonRow{
+  padding-top: 0px !important;
+  display: flex;
+    justify-content: right;
+}
+.image{
+  height: 100vh;
+  background-image: url(./Images/LandingPage.png);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.Add{
+  /* height: 100vh; */
+  background-image: url(./Images/addUser.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.addUser{
+  /* height: 100vh; */
+  background-image: url(./Images/article3.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.update{
+  /* height: 100vh; */
+  background-image: url(./Images/addArticle.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.article{
+  height: 100vh;
+  background-image: url(./Images/article.jpg);
+  background-size: cover;
+  /* background-attachment: fixed; */
+  background-repeat: no-repeat;
+  background-position: center;
+  position: relative;
+}
+.hunid{
+  height: 100% !important;
+}
+.articleRow {
+  padding-top: 140px !important ;
+}
+.transDisplay {
+  background: transparent;
+  box-shadow: none;
+}
+f.white {
+  color: white !important;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+}
+.eighty{
+  width: 80% !important; 
+}
+.homelink{
+  color: white;
+  background: blue;
+  width: 90px;
+  text-align: center;
+  border-radius: var(--bs-border-radius-pill)!important;
+}
+.QR{
+  height: 170px;
+  width: auto;
+}
+.navbar {
+  background-color: rgba(0, 0,0,.9) ;
+  /* position: relative; */
+  /* z-index: 999; */
+  height: 95px;
+  width: 100%;
+}
+.navbar-bg{
+  background-color: rgba(0, 0,0,.9);
+}
+
+
+.sticky-nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+}
+
+
+.navbar-nav a {
+  color: #f1f1f1 !important;
+  transition: all 0.25s ease-in-out;
+}
+
+.navbar-nav a:hover {
+  color: #4169E1 !important;
+}
+
+.navbar-nav a.active {
+  color: white !important;
+  /* background-color: #4169E1; */
+  border-radius: 100px;
+  padding: 12px;
+}
+.whiteBorder{
+  border-color: white;
+}
+
+#home::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  right: 0;
+  left: 0;
+  background-color: rgba(43, 43, 43, 0.4);
+}
+
+.navbar-nav .nav-item {
+  padding-right: 10px;
+} 
+
+#home .home-info {
+  height: 100vh;
+  color: #fff;
+  position: relative;
+}
+
+#home .home-info h1 {
+  font-size: 50px;
+  font-weight: 700;
+  white-space: nowrap;    
+  /* overflow: hidden; */
+  color: black;
+  
+}
+.article hr {
+  opacity: 100;
+  color: #5090d7;
+  height: 1px;
+  width: 10%;
+  background-color: #5090d7;
+}
+.articleContainer{
+  padding-left: 80px !important;
+  padding-right: 80px !important;
+}
+.Home .row{
+  padding-top: 350px;
+}
+.black{
+  color: black;
+}
+.Blogs p {
+  text-align: left;
+}
+
+#home .home-info .search button {
+  border: #4169E1 2px solid;
+  color: white;
+  background-color: #4169E1;
+}
+
+#home .home-info .search button:hover {
+  background-color: white;
+  color: #4169E1;
+  border: white 2px solid;
+}
+#home .homeico:hover {
+  color: #4169E1;
+}
+.logo{
+  height: 80px;
+  padding-top: 12px;
+;
+
+}
+.navbar {
+
+  background-color: transparent ;
+}
+.navbar.colorChange{
+  background-color: rgba(0, 0, 0, 0.92) !;
+}
+
+.scrollNav {
+  transition: all 0.5s ease-in;
+  z-index: 2000;
+  background: #ffffff;
+  width: 100%;
+  border-bottom: 1px solid #dddddd;
+}
+.sticky {
+  position: fixed;
+  top: 0;
+  width: 100%;
+}
+.z{
+  z-index: 10000;
+}
+.ztwo{
+  z-index: 2500;
+}
+.sticky + .content {
+  padding-top: 60px;
+}
+.fa-message{
+  padding: 2px;
+  display: flex;
+  justify-content: center;
+}
+#home .fixed-item button {
+  position: fixed;
+  top: 35vh;
+  right: 0;
+  padding: 8px;
+  background-color: #6e6e6e;
+  border-radius: 4px 0 0 4px;
+  border: none;
+  z-index: 99999;
+}
+
+#home .fixed-item button i {
+  font-size: 22px;
+  color: #f1f1f1;
+}
+.zeroPx{
+  border-radius: 0px;
+}
+
+p{
+  text-align: justify;
+  font-size: 18px;
+  line-height: 1.375;
+  margin: 0 0 1.4rem;
+}
+
+.Blogs{
+  background-color: #f8f8f8;
+}
+/* CARDS SECTION */
+.centero{
+  display: flex;
+  justify-content: center !important;
+}
+
+.myRow{
+  box-shadow: 7px 6px 15px;
+  background-color: white;
+  border-radius: 15px;
+}
+.myContainer{
+  padding-top: 60px;
+}
+.myCol{
+  padding: 50px 50px 120px 50px;
+}
+.txtcenter{
+  text-align: center;
+  margin-bottom: 0px !important;
+}
+.quitText{
+  font-size: 0.775em !important;
+}
+.rowButton{
+  display: flex;
+  justify-content: center;
+  /* margin-top: 30px !important; */
+}
+.buttonLogin{
+  width: 75% !important;
+  height: 50px;
+}
+.inputLogin{
+  width: 75% !important;
+}
+.login{
+  background: #dddddd;
+  height:100vh;
+}
+.login a {
+  text-decoration: none;
+}
+.signup a {
+  text-decoration: none;
+}
+@media only screen and (max-width: 990px) {
+  .login {
+    height:auto;
+  }
+  
+}
+.wel{
+  padding-top: 50px;
+}
