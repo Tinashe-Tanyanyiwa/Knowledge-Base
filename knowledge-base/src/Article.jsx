@@ -10,16 +10,38 @@ import 'bootstrap/dist/css/bootstrap.css';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faAnglesRight } from '@fortawesome/free-solid-svg-icons';
 import '@fortawesome/fontawesome-svg-core/styles.css';
+import axios from 'axios';
+import {useEffect} from 'react';
+import { useState } from 'react';
 import {
     BrowserRouter,
     Routes,
     Route,
     Link,
     useNavigate,
+    useLocation,
   } from "react-router-dom";
   import Footer from './Footer';
 
 const Article = () => {
+  const [articles, setArticles] = useState([]);
+
+  const location = useLocation()
+    const articlesId = location.pathname.split("/")[2]
+
+  useEffect(()=>{
+    const fetchAllArticles = async ()=>{
+      try{
+        const res = await axios.get("http://localhost:8800/articles/" + articlesId, articles)
+        setArticles(res.data);
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchAllArticles()
+  },[])
+
   return (
     <div className='hunid'>
         <div className="article">

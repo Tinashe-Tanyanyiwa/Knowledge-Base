@@ -29,7 +29,10 @@ import {
 
 export default function Blogs() {
   const [lgShow, setLgShow] = useState(false);
-  const [articles, setArticles] = useState([])
+  const [articles, setArticles] = useState([]);
+  const [articlesTitle, setArticlesTitle] = useState("")
+  const [articlesBriefDescription, setArticlesBriefDescription] = useState("")
+  const [searchedArticles, setSearchedArticles] = useState([])
   // MODAL ON DELETE
   const [show, setShow] = useState(false);
 
@@ -71,6 +74,20 @@ export default function Blogs() {
     }
   }
 
+  //SEARCH TABLE USER
+  useEffect(()=>{
+    const fetchSelected = async ()=>{
+      try{
+        const res = await axios.get("http://localhost:8800/articles/search", {articlesTitle})
+        setSearchedArticles(res.data);
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchSelected()
+  },[])
+
   return (
     <div className="Blogs pad">
     <Container>
@@ -79,7 +96,7 @@ export default function Blogs() {
     {/* <hr className='black d-flex justify-content-center' style={{ width: '20%', color: '#4169E1',backgroundColor:'#4169E1' }} /> */}
     <Nav variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3">
       <Nav.Item>
-          <Nav.Link href="/home">All</Nav.Link>
+          <Nav.Link href="/home">Add</Nav.Link>
         </Nav.Item>
         <Nav.Item>
           <Nav.Link eventKey="link-1">Synology</Nav.Link>
@@ -89,6 +106,7 @@ export default function Blogs() {
             Palladium
           </Nav.Link>
         </Nav.Item>
+        
       </Nav>
     </Row>
   <Row className="d-flex justify-content-center">
@@ -120,7 +138,7 @@ export default function Blogs() {
                 </Link>
               </a>
               <Button className='ml-7' onClick={handleShow} style={{marginLeft: '7px' }} variant="outline-danger">Delete</Button>{' '}
-              <Link to='/update'><Button variant="outline-secondary">Update</Button>{' '}</Link>
+              <Link to={`/update/${articles.articlesId}`}><Button variant="outline-secondary">Update</Button>{' '}</Link>
             </Card.Text>
             
             {/* MODAL ON DELETE */}

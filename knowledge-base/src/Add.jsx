@@ -39,10 +39,10 @@ export default function Add() {
     articlesBody : ""
 });
 
-const [articlesTitle,setArticlesTitle] = useState("");
-const [articlesImageUrl,setArticlesImageUrl] = useState("");
-const [articlesBriefDescription,setArticlesBriefDescription] = useState("");
-const [articlesBody,setArticlesBody] = useState("");
+  const [articlesTitle,setArticlesTitle] = useState("");
+  const [articlesImageUrl,setArticlesImageUrl] = useState("");
+  const [articlesBriefDescription,setArticlesBriefDescription] = useState("");
+  const [articlesBody,setArticlesBody] = useState("");
 
     const navigate = useNavigate()
 

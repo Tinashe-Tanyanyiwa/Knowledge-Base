@@ -51,7 +51,7 @@ export default function AddUser() {
     
             // Input is not empty
             try{
-                await axios.post("http://localhost:8800/user",user)
+                await axios.post("http://localhost:8800/user/signup",user)
                 navigate("/")
               }catch(err){
                 console.log(err)

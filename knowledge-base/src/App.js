@@ -30,7 +30,7 @@ function App() {
           <Route path="/add" element={<Add/>}/> 
           <Route path="/article/:articlesId" element={<Article/>}/>  
           <Route path="/addUser" element={<AddUser/>}/>    
-          <Route path="/update" element={<Update/>}/>    
+          <Route path="/update/:articlesId" element={<Update/>}/>    
         </Routes>
       </BrowserRouter>
     </div>

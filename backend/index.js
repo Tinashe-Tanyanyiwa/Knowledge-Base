@@ -67,7 +67,7 @@ app.get("/user", (req,res)=>{
     })
 })
 
-// CREATING A POST REQUESET, INSERTING VALUES INTO THE TABLE
+// CREATING A POST REQUESET, INSERTING VALUES INTO THE USER TABLE
 app.post("/user", (req,res)=>{
     const q = "INSERT INTO user (`username`,`password`,`email`,`contact`,`role`) VALUES (?)";
     const values = [ 
@@ -81,5 +81,54 @@ app.post("/user", (req,res)=>{
     db.query(q, [values] ,(err,data)=>{
         if(err) return res.json(err)
         return res.json("User has been created successfuly!")
+    })
+})
+
+// LOGIN PAGE
+app.post("/user/login", (req,res)=>{
+    const q = "SELECT * FROM user WHERE username = ? AND  password = ?";
+
+    db.query(q, [req.body.username,req.body.password] ,(err,data)=>{
+        if(err) return res.json("Error")
+        if(data.length > 0 ) {
+            return res.json("Login Succesful")
+        } else {
+            return res.json("No Record")
+        }
+        
+    })
+})
+
+// CREATING A POST REQUESET, INSERTING VALUES INTO USER THE TABLE FOR SIGNUP PAGE
+app.post("/user/signup", (req,res)=>{
+    const q = "INSERT INTO user (`username`,`password`,`email`,`contact`,`role`) VALUES (?)";
+    const values = [ 
+        req.body.username,
+        req.body.password,
+        req.body.email,
+        req.body.contact,
+        req.body.role,
+    ] 
+
+    db.query(q, [values] ,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json("Article has been created successfuly!")
+    })
+})
+
+// UPDATING THE ARTICLE
+app.put("/articles/:articlesId", (req,res)=>{
+    const articlesId = req.params.articlesId;
+    const q = "UPDATE articles SET `articlesTitle` = ?,`articlesImageUrl` = ?,`articlesBriefDescription` = ?,`articlesBody` = ? WHERE articlesId = ?";
+    const values = [ 
+        req.body.articlesTitle,
+        req.body.articlesImageUrl,
+        req.body.articlesBriefDescription,
+        req.body.articlesBody,
+    ] 
+
+    db.query(q, [...values,articlesId] ,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json("Article has been updated successfuly!")
     })
 })

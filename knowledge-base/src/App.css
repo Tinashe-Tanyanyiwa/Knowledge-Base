@@ -24,6 +24,12 @@ body {
 .gray{
   background-color: #dddddd ;
 }
+.form{
+  background: none;
+  border-radius: 0;
+  box-shadow: none;
+  padding: 0;
+}
 
 .red{
   background-color: red;

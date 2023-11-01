@@ -7,6 +7,9 @@ import Form from 'react-bootstrap/Form';
 import InputGroup from 'react-bootstrap/InputGroup';
 import Button from 'react-bootstrap/Button';
 import './App.css';
+import axios from 'axios';
+import { useState } from 'react';
+import {useEffect} from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -14,7 +17,25 @@ import {
   Link,
 } from "react-router-dom";
 
-export default function landing() {
+export default function Landing() {
+  const [articlesTitle, setArticlesTitle] = useState("");
+  // const [articlesBriefDescription, setArticlesBriefDescription] = useState("");
+  // const [searchedArticles, setSearchedArticles] = useState([]);
+
+    //SEARCH TABLE USER
+    // useEffect(()=>{
+      const fetchSelected = async ()=>{
+        try{
+          const res = await axios.get("http://localhost:8800/articles/search", {articlesTitle})
+          setArticlesTitle(res.data);
+  
+        }catch(err){
+          console.log(err)
+        }
+      }
+    //   fetchSelected()
+    // },[])
+  
   return (
     <>
     <div>
@@ -32,12 +53,11 @@ export default function landing() {
                     
                     </Col>
                     <Col lg={{ span: 6, offset: 3 }}>
-
                 {/* <h1 className ="my-4"></h1> */}
                 <h2 className='black'>How can we help?</h2>
                 <p className='black'>Browse through our frequently asked questions, tutorials, and other self-help resources to find the answers you need.</p>
                 <InputGroup  >
-                    <Form.Control placeholder="Search" aria-label="Dollar amount (with dot and two decimal places)" />
+                    <Form.Control placeholder="Search" onChange={e => setArticlesTitle(e.target.value)} aria-label="Dollar amount (with dot and two decimal places)" />
                     <Button className='search' variant="primary">Search</Button>{' '}
                 </InputGroup>
                 <div className="pt-3"> 
