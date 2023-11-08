@@ -18,7 +18,7 @@ import {
 const Website = () => {
   return (
     <div>
-    <Landing/>
+    {/* <Landing/> */}
     <Blogs/>
     <Footer/>
     </div>

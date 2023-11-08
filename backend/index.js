@@ -30,12 +30,13 @@ app.get("/articles", (req,res)=>{
 
 // CREATING A POST REQUESET, INSERTING VALUES INTO THE TABLE
 app.post("/articles", (req,res)=>{
-    const q = "INSERT INTO articles (`articlesTitle`,`articlesImageUrl`,`articlesBriefDescription`,`articlesBody`) VALUES (?)";
+    const q = "INSERT INTO articles (`articlesTitle`,`articlesImageUrl`,`articlesBriefDescription`,`articlesBody`,`articlesCategory`) VALUES (?)";
     const values = [ 
         req.body.articlesTitle,
         req.body.articlesImageUrl,
         req.body.articlesBriefDescription,
         req.body.articlesBody,
+        req.body.articlesCategory,
     ] 
 
     db.query(q, [values] ,(err,data)=>{
@@ -85,19 +86,26 @@ app.post("/user", (req,res)=>{
 })
 
 // LOGIN PAGE
-app.post("/user/login", (req,res)=>{
-    const q = "SELECT * FROM user WHERE username = ? AND  password = ?";
-
-    db.query(q, [req.body.username,req.body.password] ,(err,data)=>{
-        if(err) return res.json("Error")
-        if(data.length > 0 ) {
-            return res.json("Login Succesful")
+app.post("/user/login", (req, res) => {
+    const q = "SELECT * FROM user WHERE username = ? AND password = ?";
+  
+    db.query(q, [req.body.username, req.body.password], (err, data) => {
+      if (err) return res.json("Error");
+  
+      if (data.length > 0) {
+        const user = data[0];
+  
+        // Check if the "role" column has the value "Administrator"
+        if (user.role === "Administrator") {
+          return res.json("Login Successful");
         } else {
-            return res.json("No Record")
+          return res.json("Not Administrator");
         }
-        
-    })
-})
+      } else {
+        return res.json("No Record");
+      }
+    });
+  });
 
 // CREATING A POST REQUESET, INSERTING VALUES INTO USER THE TABLE FOR SIGNUP PAGE
 app.post("/user/signup", (req,res)=>{
@@ -119,16 +127,52 @@ app.post("/user/signup", (req,res)=>{
 // UPDATING THE ARTICLE
 app.put("/articles/:articlesId", (req,res)=>{
     const articlesId = req.params.articlesId;
-    const q = "UPDATE articles SET `articlesTitle` = ?,`articlesImageUrl` = ?,`articlesBriefDescription` = ?,`articlesBody` = ? WHERE articlesId = ?";
+    const q = "UPDATE articles SET `articlesTitle` = ?,`articlesImageUrl` = ?,`articlesBriefDescription` = ?,`articlesBody` = ?, `articlesCategory` = ? WHERE articlesId = ?";
     const values = [ 
         req.body.articlesTitle,
         req.body.articlesImageUrl,
         req.body.articlesBriefDescription,
         req.body.articlesBody,
+        req.body.articlesCategory,
     ] 
 
     db.query(q, [...values,articlesId] ,(err,data)=>{
         if(err) return res.json(err)
         return res.json("Article has been updated successfuly!")
+    })
+})
+// DISPLAY THE ARTICLE
+app.get("/articles/:articlesId", (req,res)=>{
+    
+    const q = "SELECT * FROM articles";
+   
+
+    db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+})
+
+// CATEGORY SECTION OF THE DATABASE 
+// GET ALL CATEGORIES FROM TABLE
+app.get("/category", (req,res)=>{
+    const q = "SELECT * FROM category"
+    db.query(q,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json(data)
+    })
+  })
+
+//   CREATE NEW CATEGROY
+app.post("/category", (req,res)=>{
+    const q = "INSERT INTO category (`categoryname`,`categorydescription`) VALUES (?)";
+    const values = [ 
+        req.body.categoryname,
+        req.body.categorydescription,
+    ] 
+
+    db.query(q, [values] ,(err,data)=>{
+        if(err) return res.json(err)
+        return res.json("Category has been created successfuly!")
     })
 })

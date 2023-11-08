@@ -73,13 +73,16 @@ body {
   position: relative;
 }
 .Add{
-  /* height: 100vh; */
+  height: 100vh;
   background-image: url(./Images/addUser.jpg);
   background-size: cover;
   /* background-attachment: fixed; */
   background-repeat: no-repeat;
   background-position: center;
   position: relative;
+}
+.category{
+  padding-top: 120px !important;
 }
 .addUser{
   /* height: 100vh; */
@@ -117,6 +120,18 @@ body {
 .transDisplay {
   background: transparent;
   box-shadow: none;
+}
+.Add .transDisplay{
+  background: transparent;
+  box-shadow: none;
+  padding-bottom: 0px;
+  padding-top: 14px;
+}
+.update .transDisplay{
+  background: transparent;
+  box-shadow: none;
+  padding-bottom: 0px;
+  padding-top: 14px;
 }
 f.white {
   color: white !important;

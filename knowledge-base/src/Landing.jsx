@@ -16,11 +16,12 @@ import {
   Route,
   Link,
 } from "react-router-dom";
+import Blogs from './Blogs';
 
 export default function Landing() {
   const [articlesTitle, setArticlesTitle] = useState("");
   // const [articlesBriefDescription, setArticlesBriefDescription] = useState("");
-  // const [searchedArticles, setSearchedArticles] = useState([]);
+  const [search, setSearch] = useState('');
 
     //SEARCH TABLE USER
     // useEffect(()=>{
@@ -38,48 +39,7 @@ export default function Landing() {
   
   return (
     <>
-    <div>
-      <div className="Home">
-                <section id="home" className=''>
-                
-            <div className ="image home-info d-flex flex-column justify-content-center align-items-center">
-            
-            <Container className='row'>
-              {/* <Row className='buttonRow'>
-               <Button variant="secondary" className='logoutButton'>Log Out</Button>{' '}
-             </Row> */}
-                 <Row >
-                    <Col>
-                    
-                    </Col>
-                    <Col lg={{ span: 6, offset: 3 }}>
-                {/* <h1 className ="my-4"></h1> */}
-                <h2 className='black'>How can we help?</h2>
-                <p className='black'>Browse through our frequently asked questions, tutorials, and other self-help resources to find the answers you need.</p>
-                <InputGroup  >
-                    <Form.Control placeholder="Search" onChange={e => setArticlesTitle(e.target.value)} aria-label="Dollar amount (with dot and two decimal places)" />
-                    <Button className='search' variant="primary">Search</Button>{' '}
-                </InputGroup>
-                <div className="pt-3"> 
-                <Link to='/add'><Button variant="outline-primary">Add Blog</Button>{' '}</Link>
-                <Link to='/addUser'><Button variant="outline-success">Add User</Button>{' '}</Link>
-                </div>
-                {/* <button type="button"  className ="btn btn-outline-success mt-4 py-3 px-5 border-2 fw-bold rounded-pill">Contact Me</button> */}
-                <div className='row'>
-                  <div className='col-md-6'>
-                  </div>
-                </div>
-                
-                    </Col>
-                </Row>
-            </Container>
-                
-            </div>
-            
-        </section>
-
-    </div>
-    </div>
+   <p>Hey</p>
     </>
   )
 }

@@ -3,6 +3,8 @@ import './custom.css'
 import './main.css'
 import 'bootstrap/dist/css/bootstrap.css';
 import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
+import InputGroup from 'react-bootstrap/InputGroup';
 import Card from 'react-bootstrap/Card';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
@@ -26,11 +28,15 @@ import {
   Link,
   useNavigate,
 } from "react-router-dom";
+import Landing from './Landing';
 
 export default function Blogs() {
+  const [search, setSearch] = useState('');
   const [lgShow, setLgShow] = useState(false);
   const [articles, setArticles] = useState([]);
+  const [category, setCategory] = useState([])
   const [articlesTitle, setArticlesTitle] = useState("")
+  const [categoryname,setCategoryname] = useState("")
   const [articlesBriefDescription, setArticlesBriefDescription] = useState("")
   const [searchedArticles, setSearchedArticles] = useState([])
   // MODAL ON DELETE
@@ -39,7 +45,7 @@ export default function Blogs() {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-
+// GETTING ARTICLES
   useEffect(()=>{
     const fetchAllArticles = async ()=>{
       try{
@@ -53,6 +59,20 @@ export default function Blogs() {
     fetchAllArticles()
   },[])
 
+  // GETTING CATEGORIES
+  useEffect(()=>{
+    const fetchAllCategories = async ()=>{
+      try{
+        const res = await axios.get("http://localhost:8800/category")
+        setCategory(res.data);
+
+      }catch(err){
+        console.log(err)
+      }
+    }
+    fetchAllCategories()
+  },[])
+
   // MODAL
   const openModal = (e) =>  {
     e.preventDefault()
@@ -62,8 +82,7 @@ export default function Blogs() {
   useEffect(() => {
     
   }, []);
-
-
+ 
   // DELETE
   const handleDelete = async (articlesId) =>{
     try{
@@ -74,7 +93,7 @@ export default function Blogs() {
     }
   }
 
-  //SEARCH TABLE USER
+  //SEARCH TABLE ARTICLES
   useEffect(()=>{
     const fetchSelected = async ()=>{
       try{
@@ -89,29 +108,82 @@ export default function Blogs() {
   },[])
 
   return (
-    <div className="Blogs pad">
+    <div className="blogme">
+      {/* LANDING */}
+      <div>
+      <div className="Home">
+                <section id="home" className=''>
+                
+            <div className ="image home-info d-flex flex-column justify-content-center align-items-center">
+            
+            <Container className='row'>
+              {/* <Row className='buttonRow'>
+               <Button variant="secondary" className='logoutButton'>Log Out</Button>{' '}
+             </Row> */}
+                 <Row >
+                    <Col>
+                    
+                    </Col>
+                    <Col lg={{ span: 6, offset: 3 }}>
+                {/* <h1 className ="my-4"></h1> */}
+                <h2 className='black'>How can we help?</h2>
+                <p className='black'>Browse through our frequently asked questions, tutorials, and other self-help resources to find the answers you need.</p>
+                <InputGroup  >
+                    <Form.Control placeholder="Search" onChange={(e) => setSearch(e.target.value)} aria-label="Dollar amount (with dot and two decimal places)" />
+                    <a href="#blogs"><Button className='search' variant="primary">Search </Button>{' '}</a>
+                </InputGroup>
+                <div className="pt-3"> 
+                <Link to='/add'><Button variant="outline-primary">Add Blog</Button>{' '}</Link>
+                <Link to='/addUser'><Button variant="outline-success">Add User</Button>{' '}</Link>
+                </div>
+                {/* <button type="button"  className ="btn btn-outline-success mt-4 py-3 px-5 border-2 fw-bold rounded-pill">Contact Me</button> */}
+                <div className='row'>
+                  <div className='col-md-6'>
+                  </div>
+                </div>
+                
+                    </Col>
+                </Row>
+            </Container>
+                
+            </div>
+            
+        </section>
+
+    </div>
+    </div>
+    {/* LANDING */}
+    <div className="Blogs pad" id='blogs'>
     <Container>
     <Row className="d-flex justify-content-center">
     <h2 className='black d-flex justify-content-center pb-3' lg={12}>Blog Category</h2>
-    {/* <hr className='black d-flex justify-content-center' style={{ width: '20%', color: '#4169E1',backgroundColor:'#4169E1' }} /> */}
-    <Nav variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3">
+      {/* MAPPING CATEGORIES */}
+      <Nav  variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3">
       <Nav.Item>
-          <Nav.Link href="/home">Add</Nav.Link>
+        <Link to='/addCategory'><Button variant="outline-primary">Add Category</Button>{' '}</Link>
         </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-1">Synology</Nav.Link>
-        </Nav.Item>
-        <Nav.Item>
-          <Nav.Link eventKey="link-2" >
-            Palladium
-          </Nav.Link>
-        </Nav.Item>
-        
-      </Nav>
+    {category.map((category) => (
+        <Nav.Item key={category.categoryid}>
+          <Nav.Link eventKey="link-1">{category.categoryname}</Nav.Link>
+        </Nav.Item> 
+    ))}
+    </Nav>
     </Row>
   <Row className="d-flex justify-content-center">
+    
 
-    {articles.map((articles) => (
+
+    {/* MAPPING ARTICLES */}
+    {articles
+    .filter((articles) => {
+      const lowercaseSearch = search.toLowerCase();
+      const lowercaseTitle = articles.articlesTitle.toLowerCase();
+      
+      return lowercaseSearch === '' 
+        ? articles
+        : lowercaseTitle.includes(lowercaseSearch);
+    })
+    .map((articles) => (
       
       <Col key={articles.articlesId} xs={12} md={6} lg={4} className="pad d-flex justify-content-center">
         {/* MODAL VIEW*/}
@@ -163,5 +235,7 @@ export default function Blogs() {
 </Container>
 
     </div>
+    </div>
   )
 }
+

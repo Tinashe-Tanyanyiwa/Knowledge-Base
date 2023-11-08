@@ -36,20 +36,22 @@ export default function Add() {
     articlesTitle : "" ,
     articlesImageUrl : "" ,
     articlesBriefDescription : "",
-    articlesBody : ""
+    articlesBody : "",
+    articlesCategory : ""
 });
 
   const [articlesTitle,setArticlesTitle] = useState("");
   const [articlesImageUrl,setArticlesImageUrl] = useState("");
   const [articlesBriefDescription,setArticlesBriefDescription] = useState("");
   const [articlesBody,setArticlesBody] = useState("");
+  const [articlesCategory,setArticlesCategory] = useState("");
 
     const navigate = useNavigate()
 
  
     const handleClick = async e =>{
         e.preventDefault()
-        if ((articlesTitle.trim() === '')  || (articlesImageUrl.trim() === '') || (articlesBriefDescription.trim() === '') || (articlesBody.trim() === '')) {
+        if ((articlesTitle.trim() === '')  || (articlesImageUrl.trim() === '') || (articlesBriefDescription.trim() === '') || (articlesBody.trim() === '') || (articlesCategory.trim() === '')) {
             // Input is empty
             alert('Fill in all Input values!');
             return;
@@ -71,6 +73,7 @@ const clearClick = () => {
     setArticlesImageUrl('');
     setArticlesBriefDescription('');
     setArticlesBody('');
+    setArticlesCategory('');
   };
  
 // CHECKING  IF ALL INPUTS HAVE BEEN ENTERED
@@ -90,7 +93,10 @@ const clearClick = () => {
     setArticles((prev) => ({...prev, [e.target.name]: e.target.value}));
     setArticlesBody(e.target.value);
   }
-
+  const handleChangeCategory= (e) =>{
+    setArticles((prev) => ({...prev, [e.target.name]: e.target.value}));
+    setArticlesCategory(e.target.value);
+  }
   console.log(articles)
 
 
@@ -113,6 +119,10 @@ const clearClick = () => {
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Brief Description</Form.Label>
                 <Form.Control as="textarea" rows={2} value={articlesBriefDescription} onChange={handleChangeBriefDescription} name='articlesBriefDescription'/>
+            </Form.Group>
+            <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
+                <Form.Label>Category</Form.Label>
+                <Form.Control as="textarea" rows={1} value={articlesCategory} onChange={handleChangeCategory} name='articlesCategory'/>
             </Form.Group>
             <Form.Group className="mb-3" controlId="exampleForm.ControlTextarea1">
                 <Form.Label>Article</Form.Label>

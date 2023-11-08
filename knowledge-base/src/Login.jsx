@@ -45,23 +45,28 @@ export default function Login() {
       
         // Input is not empty
         axios
-          .post("http://localhost:8800/user/login", { username, password })
-          .then((res) => {
-            console.log(res);
-            if(res.data === "Login Succesful"){
-                navigate("/home")
-            }
-            else{
-             console.log("Not working")   
-            }
-            // navigate("/home");
-          })
-          .catch((err) => {
-            console.log(err);
-            navigate("/");
-            // Handle the error here, such as displaying an error message to the user
-          });
-      };
+            .post("http://localhost:8800/user/login", { username, password })
+            .then((res) => {
+                console.log(res);
+
+                if (res.data === "Login Successful") {
+                    console.log("Administrator");
+                    navigate("/home");
+                } else if (res.data === "Not Administrator") {
+                    console.log("Not administrator");
+                    navigate("/blogs");
+                } else {
+                console.log("Not working");
+                alert("Enter correct details");
+                return;
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+                navigate("/");
+                // Handle the error here, such as displaying an error message to the user
+            });
+        };
   
 
     return (

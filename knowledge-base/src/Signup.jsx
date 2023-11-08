@@ -101,7 +101,7 @@ const [username,setUsername] = useState("");
                             />
                         </Form.Group>
                         <Form.Group className="mb-3 centero" controlId="exampleForm.ControlInput1">
-                            <Form.Control className='inputLogin' type="email" placeholder="example@gmail.com" onChange={handleChangeEmail} value={email}  name='email' />
+                            <Form.Control className='inputLogin' type="email" placeholder="example@gmail.com" onChange={handleChangeEmail} value={email} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name='email' />
                         </Form.Group>
                         <Form.Group className="mb-3 centero" controlId="exampleForm.ControlInput1">
                             <Form.Control className='inputLogin' type="input" placeholder="Number: 07********" onChange={handleChangeContact} value={contact}  name='contact' />

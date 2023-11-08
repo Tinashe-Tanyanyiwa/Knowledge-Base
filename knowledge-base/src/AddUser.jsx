@@ -48,6 +48,13 @@ export default function AddUser() {
                 alert('Fill in all Input values!');
                 return;
             }
+            const rgExp = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2,6}$/;
+            if (rgExp.test(email)) {
+              console.log("The Email address is valid")
+            }else {
+              alert('Enter your email in this format:  \n email@address.com');
+              return;
+            }
     
             // Input is not empty
             try{
