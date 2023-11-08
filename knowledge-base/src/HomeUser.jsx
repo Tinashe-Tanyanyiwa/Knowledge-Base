@@ -85,7 +85,21 @@ export default function HomeUser() {
   }, []);
 
 
+  // FILTERING THE BLOGS
+  const filterItems = (catItem)=> {
+    const updateItems= articles.filter((curItem) => {
+      return curItem.articlesCategory === catItem
+    });
+    setItems(updateItems)
+  }
 
+  const [items,setItems] = useState(articles);
+  useEffect(() => {
+    setItems(articles);
+  }, [articles]);
+  
+ console.log(items);
+ 
 
   //SEARCH TABLE ARTICLES
   useEffect(()=>{
@@ -100,7 +114,7 @@ export default function HomeUser() {
     }
     fetchSelected()
   },[])
-
+  console.log(items);
   return (
     <div className="blogme">
       {/* LANDING */}
@@ -147,11 +161,13 @@ export default function HomeUser() {
     <Row className="d-flex justify-content-center">
     <h2 className='black d-flex justify-content-center pb-3' lg={12}>Blog Category</h2>
       {/* MAPPING CATEGORIES */}
-      <Nav  variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3">
-      
+      <Nav  variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3 navItems">
+        <Nav.Item >
+          <Nav.Link eventKey="link-1" disabled={false} className='zeropad categoryButton noline'><Button variant="outline-primary" onClick={() => setItems(articles)} className='categoryButton'>All</Button>{' '}</Nav.Link>
+        </Nav.Item> 
     {category.map((category) => (
-        <Nav.Item key={category.categoryid}>
-          <Nav.Link eventKey="link-1">{category.categoryname}</Nav.Link>
+        <Nav.Item className='noline' key={category.categoryid}>
+          <Nav.Link  eventKey="link-1" className='categoryButton noline zeropad' ><Button variant="outline-primary" onClick={() => filterItems(category.categoryname)} className='categoryButton'>{category.categoryname}</Button>{' '}</Nav.Link>
         </Nav.Item> 
     ))}
     </Nav>
@@ -161,7 +177,7 @@ export default function HomeUser() {
 
 
     {/* MAPPING ARTICLES */}
-    {articles
+    {items
     .filter((articles) => {
       const lowercaseSearch = search.toLowerCase();
       const lowercaseTitle = articles.articlesTitle.toLowerCase();

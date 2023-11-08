@@ -83,6 +83,27 @@ body {
 }
 .category{
   padding-top: 120px !important;
+} 
+.categoryButton{
+  border-width: 0px !important;
+  --bs-btn-hover-color: initial !important;
+  --bs-btn-hover-bg: initial !important;
+  background-color: transparent !important;
+} 
+.zeropad{
+    padding: 0px;
+}
+.noline{
+  border-width: 0px;
+  --bs-nav-tabs-border-width: unset !important;
+}
+.categoryList{
+  background-color: unset !important;
+  border-color: unset !important;
+  border-width: 0px;
+} 
+.navItems{
+  --bs-nav-tabs-link-active-bg: initial !important;
 }
 .addUser{
   /* height: 100vh; */

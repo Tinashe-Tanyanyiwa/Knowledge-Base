@@ -43,11 +43,18 @@ const [username,setUsername] = useState("");
           alert('Enter all your information!');
           return;
       }
-
+      const rgExp = /^[a-zA-Z0-9._]+@[a-z]+\.[a-z]{2,6}$/;
+            if (rgExp.test(email)) {
+              console.log("The Email address is valid")
+            }else {
+              alert('Enter your email in this format:  \n email@address.com');
+              return;
+            }
+    
       // Input is not empty
       try{
           await axios.post("http://localhost:8800/user/signup",user)
-          navigate("/home")
+          navigate("/")
         }catch(err){
           console.log(err)
         }
@@ -101,7 +108,7 @@ const [username,setUsername] = useState("");
                             />
                         </Form.Group>
                         <Form.Group className="mb-3 centero" controlId="exampleForm.ControlInput1">
-                            <Form.Control className='inputLogin' type="email" placeholder="example@gmail.com" onChange={handleChangeEmail} value={email} pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,3}$" name='email' />
+                            <Form.Control className='inputLogin' type="email" placeholder="example@gmail.com" onChange={handleChangeEmail} value={email}  name='email' />
                         </Form.Group>
                         <Form.Group className="mb-3 centero" controlId="exampleForm.ControlInput1">
                             <Form.Control className='inputLogin' type="input" placeholder="Number: 07********" onChange={handleChangeContact} value={contact}  name='contact' />

@@ -92,21 +92,37 @@ export default function Blogs() {
       console.log(err)
     }
   }
+  
+  //CATEGORY FILTER
 
   //SEARCH TABLE ARTICLES
-  useEffect(()=>{
-    const fetchSelected = async ()=>{
-      try{
-        const res = await axios.get("http://localhost:8800/articles/search", {articlesTitle})
-        setSearchedArticles(res.data);
+  // useEffect(()=>{
+  //   const fetchSelected = async ()=>{
+  //     try{
+  //       const res = await axios.get("http://localhost:8800/articles/search", {articlesTitle})
+  //       setSearchedArticles(res.data);
 
-      }catch(err){
-        console.log(err)
-      }
-    }
-    fetchSelected()
-  },[])
+  //     }catch(err){
+  //       console.log(err)
+  //     }
+  //   }
+  //   fetchSelected()
+  // },[])
+  // FILTERING THE BLOGS
+  const filterItems = (catItem)=> {
+    const updateItems= articles.filter((curItem) => {
+      return curItem.articlesCategory === catItem
+    });
+    setItems(updateItems)
+  }
 
+  const [items,setItems] = useState(articles);
+  useEffect(() => {
+    setItems(articles);
+  }, [articles]);
+  
+ console.log(items);
+ 
   return (
     <div className="blogme">
       {/* LANDING */}
@@ -128,7 +144,7 @@ export default function Blogs() {
                 {/* <h1 className ="my-4"></h1> */}
                 <h2 className='black'>How can we help?</h2>
                 <p className='black'>Browse through our frequently asked questions, tutorials, and other self-help resources to find the answers you need.</p>
-                <InputGroup  >
+                <InputGroup>
                     <Form.Control placeholder="Search" onChange={(e) => setSearch(e.target.value)} aria-label="Dollar amount (with dot and two decimal places)" />
                     <a href="#blogs"><Button className='search' variant="primary">Search </Button>{' '}</a>
                 </InputGroup>
@@ -156,25 +172,28 @@ export default function Blogs() {
     <div className="Blogs pad" id='blogs'>
     <Container>
     <Row className="d-flex justify-content-center">
-    <h2 className='black d-flex justify-content-center pb-3' lg={12}>Blog Category</h2>
+    <h2 className='black d-flex justify-content-center pb-3 ' lg={12}>Blog Category</h2>
       {/* MAPPING CATEGORIES */}
-      <Nav  variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3">
+      <Nav  variant="tabs" defaultActiveKey="/home" className="justify-content-center pb-3 navItems">
       <Nav.Item>
         <Link to='/addCategory'><Button variant="outline-primary">Add Category</Button>{' '}</Link>
         </Nav.Item>
-    {category.map((category) => (
-        <Nav.Item key={category.categoryid}>
-          <Nav.Link eventKey="link-1">{category.categoryname}</Nav.Link>
+        <Nav.Item >
+          <Nav.Link eventKey="link-1" disabled={false} className='zeropad categoryButton noline'><Button variant="outline-primary" onClick={() => setItems(articles)} className='categoryButton'>All</Button>{' '}</Nav.Link>
+        </Nav.Item> 
+      {category.map((category) => (
+        <Nav.Item className='noline' key={category.categoryid}>
+          <Nav.Link  eventKey="link-1" className='categoryButton noline zeropad' ><Button variant="outline-primary" onClick={() => filterItems(category.categoryname)} className='categoryButton'>{category.categoryname}</Button>{' '}</Nav.Link>
         </Nav.Item> 
     ))}
     </Nav>
-    </Row>
+    </Row>  
   <Row className="d-flex justify-content-center">
     
 
 
     {/* MAPPING ARTICLES */}
-    {articles
+    {items
     .filter((articles) => {
       const lowercaseSearch = search.toLowerCase();
       const lowercaseTitle = articles.articlesTitle.toLowerCase();
